@@ -19,7 +19,7 @@ from moe_optimized import OptimizedMoE
 
 # --- Configuration Switch ---
 # Set to True for large model configuration that favors MoE efficiency
-USE_LARGE_CONFIG = False  
+USE_LARGE_CONFIG = True 
 
 # --- Model Size Configurations ---
 SMALL_CONFIG = {
@@ -36,8 +36,15 @@ LARGE_CONFIG = {
     "TOP_K_EXPERTS": 2,
 }
 
+XLARGE_CONFIG = {
+    "NUM_EXPERTS": 20,
+    "EXPERT_HIDDEN_DIM": 2048,
+    "EXPERT_NUM_LAYERS": 5,
+    "TOP_K_EXPERTS": 3,
+}
+
 # Use selected configuration
-active_config = LARGE_CONFIG if USE_LARGE_CONFIG else SMALL_CONFIG
+active_config = XLARGE_CONFIG if USE_LARGE_CONFIG else SMALL_CONFIG
 
 
 # --- Configuration ---
