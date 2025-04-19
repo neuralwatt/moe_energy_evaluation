@@ -3,6 +3,13 @@ import torch.nn as nn
 from torch.utils.data import TensorDataset, DataLoader
 import math
 import time
+import warnings
+try:
+    import pynvml
+    pynvml_found = True
+except ImportError:
+    pynvml_found = False
+    warnings.warn("pynvml not found. GPU power monitoring will be disabled. Run `pip install pynvml` to enable.")
 
 # --- Function to Generate Complex Data ---
 def generate_complex_data(num_samples, input_dim, output_dim):
@@ -62,33 +69,113 @@ def time_inference(model, dataset, device, duration_seconds=30):
     inference_count = 0
     start_time = time.time()
     end_time = start_time + duration_seconds
+    total_energy_joules = 0.0
+    nvml_handle = None
+    last_time_point = start_time
+
     print(f"Starting inference timing for {duration_seconds} seconds...")
     print(f"Start Time: {time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(start_time))}")
+
+    # Initialize NVML and get handle if using CUDA and pynvml is available
+    if device.type == 'cuda' and pynvml_found:
+        try:
+            pynvml.nvmlInit()
+            # Assuming device index 0, adjust if necessary
+            gpu_index = torch.cuda.current_device()
+            nvml_handle = pynvml.nvmlDeviceGetHandleByIndex(gpu_index)
+            print(f"NVML initialized for GPU {gpu_index}.")
+        except pynvml.NVMLError as error:
+            print(f"Failed to initialize NVML or get device handle: {error}")
+            nvml_handle = None # Ensure handle is None if init fails
+        except Exception as e:
+            print(f"An unexpected error occurred during NVML initialization: {e}")
+            nvml_handle = None
+
     try:
         # Use a single batch for consistent timing
         sample_batch, _ = next(iter(dataset))
         sample_batch = sample_batch.to(device)
         if sample_batch.shape[0] == 0:
              print("Warning: Dataset loader returned an empty batch. Cannot perform timing.")
-             return 0, 0.0
+             # Shutdown NVML if it was initialized
+             if nvml_handle is not None and pynvml_found:
+                 try:
+                     pynvml.nvmlShutdown()
+                 except pynvml.NVMLError as error:
+                     print(f"Failed to shutdown NVML: {error}")
+             return 0, 0.0, 0.0
     except StopIteration:
         print("Warning: Dataset is empty. Cannot perform timing.")
-        return 0, 0.0
+        # Shutdown NVML if it was initialized
+        if nvml_handle is not None and pynvml_found:
+            try:
+                pynvml.nvmlShutdown()
+            except pynvml.NVMLError as error:
+                print(f"Failed to shutdown NVML: {error}")
+        return 0, 0.0, 0.0
 
     with torch.no_grad():
         current_time = time.time()
         while current_time < end_time:
             if device.type == 'cuda': torch.cuda.synchronize()
+            iter_start_time = time.time() # Time before inference
+
             _ = model(sample_batch) # Perform inference
+
             if device.type == 'cuda': torch.cuda.synchronize()
+            iter_end_time = time.time() # Time after inference
+
             inference_count += sample_batch.shape[0] # Count samples processed
-            current_time = time.time() # Update current time
+
+            # Measure power and calculate energy if NVML is active
+            if nvml_handle is not None:
+                try:
+                    power_milliwatts = pynvml.nvmlDeviceGetPowerUsage(nvml_handle)
+                    time_interval = iter_end_time - last_time_point # Use time since last measurement
+                    energy_joules = (power_milliwatts / 1000.0) * time_interval # Energy = Power (W) * Time (s)
+                    total_energy_joules += energy_joules
+                    last_time_point = iter_end_time # Update last time point
+                except pynvml.NVMLError as error:
+                    # Handle error, maybe stop monitoring or just print a warning
+                    print(f"Warning: Failed to get power usage: {error}. Disabling further power monitoring.")
+                    nvml_handle = None # Stop trying to read power
+                except Exception as e:
+                    print(f"An unexpected error occurred during power measurement: {e}")
+                    nvml_handle = None
+
+            current_time = iter_end_time # Update current time based on iteration end
 
     actual_end_time = time.time()
     actual_duration = actual_end_time - start_time
+
+    # Shutdown NVML if it was initialized
+    if pynvml_found and 'nvmlShutdown' in dir(pynvml):
+        try:
+            # Check if nvml was actually initialized before shutting down
+            # A bit hacky, relies on nvmlInit setting some internal state
+            # A more robust way might involve a flag set during successful init
+            pynvml.nvmlDeviceGetCount() # Check if NVML is still active
+            pynvml.nvmlShutdown()
+            print("NVML shut down.")
+        except pynvml.NVMLError as error:
+            if "NVML_ERROR_UNINITIALIZED" not in str(error):
+                 print(f"Failed to shutdown NVML: {error}")
+        except Exception as e:
+             print(f"An unexpected error occurred during NVML shutdown: {e}")
+
+
     print(f"End Time:   {time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(actual_end_time))}")
     print(f"Actual Duration: {actual_duration:.4f} seconds")
     print(f"Total Inferences: {inference_count}")
-    if actual_duration > 0: print(f"Inferences per Second: {inference_count / actual_duration:.2f}")
-    else: print("Inferences per Second: N/A")
-    return inference_count, actual_duration
+    if actual_duration > 0:
+        print(f"Inferences per Second: {inference_count / actual_duration:.2f}")
+        if total_energy_joules > 0:
+            print(f"Total Energy Consumed: {total_energy_joules:.2f} Joules")
+            print(f"Average Power: {total_energy_joules / actual_duration:.2f} Watts")
+        else:
+            print("Energy consumption monitoring was not active or recorded zero.")
+    else:
+        print("Inferences per Second: N/A")
+        print("Energy Consumption: N/A")
+
+    return inference_count, actual_duration, total_energy_joules

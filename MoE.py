@@ -6,6 +6,7 @@ import math
 import time
 
 # Import components from other files
+from moe_optimized2 import OptimizedMoE2
 from utils import (
     generate_complex_data,
     calculate_params,
@@ -16,6 +17,29 @@ from baseline_mlp import BaselineMLP
 from moe_original import MoE as MoE_Original # Rename to avoid conflict
 from moe_optimized import OptimizedMoE
 
+# --- Configuration Switch ---
+# Set to True for large model configuration that favors MoE efficiency
+USE_LARGE_CONFIG = False  
+
+# --- Model Size Configurations ---
+SMALL_CONFIG = {
+    "NUM_EXPERTS": 5,
+    "EXPERT_HIDDEN_DIM": 256,
+    "EXPERT_NUM_LAYERS": 3,
+    "TOP_K_EXPERTS": 2,
+}
+
+LARGE_CONFIG = {
+    "NUM_EXPERTS": 12,
+    "EXPERT_HIDDEN_DIM": 1024,
+    "EXPERT_NUM_LAYERS": 4,
+    "TOP_K_EXPERTS": 2,
+}
+
+# Use selected configuration
+active_config = LARGE_CONFIG if USE_LARGE_CONFIG else SMALL_CONFIG
+
+
 # --- Configuration ---
 NUM_SAMPLES = 10000
 BATCH_SIZE = 128
@@ -24,15 +48,18 @@ OUTPUT_DIM = 10
 NUM_EPOCHS = 15
 INFERENCE_DURATION = 30 # Seconds
 
-# --- Model Architecture Config ---
-NUM_EXPERTS = 5
-EXPERT_HIDDEN_DIM = 256 # Configurable hidden dim for experts
-EXPERT_NUM_LAYERS = 3   # Configurable number of hidden layers for experts (must be >= 1)
-TOP_K_EXPERTS = 2
+# --- Apply Selected Model Architecture Config ---
+NUM_EXPERTS = active_config["NUM_EXPERTS"]
+EXPERT_HIDDEN_DIM = active_config["EXPERT_HIDDEN_DIM"]
+EXPERT_NUM_LAYERS = active_config["EXPERT_NUM_LAYERS"]
+TOP_K_EXPERTS = active_config["TOP_K_EXPERTS"]
 
 BASELINE_NUM_LAYERS = EXPERT_NUM_LAYERS # Use same number of layers as experts
 # --- End Configuration ---
 
+print(f"Active configuration: {'LARGE' if USE_LARGE_CONFIG else 'SMALL'}")
+print(f"Model parameters: Experts={NUM_EXPERTS}, Hidden Dim={EXPERT_HIDDEN_DIM}, "
+      f"Layers={EXPERT_NUM_LAYERS}, Top-K={TOP_K_EXPERTS}")
 
 # --- Synthetic Dataset Creation ---
 X_synthetic, Y_synthetic = generate_complex_data(NUM_SAMPLES, INPUT_DIM, OUTPUT_DIM)
@@ -56,7 +83,7 @@ print("\n--- Original MoE Model ---")
 moe_orig_total_params = print_model_summary(model_orig, f"Original MoE (Top-{TOP_K_EXPERTS})")
 
 
-model_opt = OptimizedMoE(input_dim=INPUT_DIM,
+model_opt = OptimizedMoE2(input_dim=INPUT_DIM,
                          output_dim=OUTPUT_DIM,
                          num_experts=NUM_EXPERTS,
                          expert_hidden_dim=EXPERT_HIDDEN_DIM,
@@ -169,10 +196,12 @@ def run_analysis(models_dict, dataset, device, moe_total_params):
 
     # --- Inference Timing ---
     timing_results = {}
+    energy_results = {}
     for name, model_instance in models_dict.items():
         print(f"\n--- {name} Inference Timing ---")
-        inf_count, inf_time = time_inference(model_instance, dataset, device, INFERENCE_DURATION)
+        inf_count, inf_time, total_energy = time_inference(model_instance, dataset, device, INFERENCE_DURATION)
         timing_results[name] = {'count': inf_count, 'time': inf_time}
+        energy_results[name] = total_energy
     # --- End Inference Timing ---
 
 
@@ -253,7 +282,7 @@ def run_analysis(models_dict, dataset, device, moe_total_params):
 
     # --- End Accuracy Comparison ---
 
-    return timing_results, accuracy_results
+    return timing_results, accuracy_results, energy_results
 # --- End Analysis Function ---
 
 
@@ -263,7 +292,7 @@ if __name__ == "__main__":
         "Original MoE": model_orig,
         "Optimized MoE": model_opt
     }
-    timing_results, accuracy_results = run_analysis(models_to_evaluate, dataset, device, moe_total_params)
+    timing_results, accuracy_results, energy_results = run_analysis(models_to_evaluate, dataset, device, moe_total_params)
 
     print("\n--- Summary ---")
     print("Timing Results (Inferences per Second):")
@@ -277,4 +306,13 @@ if __name__ == "__main__":
     print("\nAccuracy Results:")
     for name, acc in accuracy_results.items():
         print(f"- {name}: {acc:.2f}%")
+
+    print("\nEnergy Efficiency Results (Inferences per Joule):")
+    for name, energy in energy_results.items():
+        inference_count = timing_results[name]['count']
+        if energy > 0 and inference_count > 0:
+             inferences_per_joule = inference_count / energy
+             print(f"- {name}: {inferences_per_joule:.2f} inferences/Joule")
+        else:
+             print(f"- {name}: N/A (Energy or Inference count is zero or unavailable)")
 # --- End Main Execution ---
