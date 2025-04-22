@@ -18,6 +18,7 @@ activation are achieved.
 First off let's look at our experiment design.  I've provided the code here: 
 https://github.com/neuralwatt/moe_energy_evaluation.  There are three models
 included in this repo.
+
 1. baseline_mlp.py
 2. moe_original.py
 3. moe_optimized2.py 
@@ -37,10 +38,12 @@ iterations, improves input and output processing, and generally speeds up the fo
 Let’s compare these with a small set of parameters to test them.
 ###
 Small params:
+```
 "NUM_EXPERTS": 8,
 "EXPERT_HIDDEN_DIM": 256,
 "EXPERT_NUM_LAYERS": 3,
 "TOP_K_EXPERTS": 2,
+```
 
 Using the Small config in the MoE.py driver script our MoE model gets initialized with 2,687,192
 parameters.  We use this to configure our baseline MLP model with a very close number of parameters:  
@@ -53,6 +56,7 @@ Energy Efficiency Results (Inferences per Joule):
 - Original MoE: 742.50 inferences/Joule
 - Optimized MoE: 770.18 inferences/Joule
 - Baseline: 5746.08 inferences/Joule
+  
 We see here that both our MoE models are around 14% as efficient as our baseline model in terms of 
 inferences per joule (the test driver runs inference in a loop for 30 seconds while summing the energy).
 So, we see our first indication that making MoE more efficient isn't as simple as it seems.
@@ -65,10 +69,13 @@ So, what we really need to have is enough computational gains in our experts as 
 for the slower model selection/merge code.  Let's try something bigger.
 
 Here is our next config 
+```
 "NUM_EXPERTS": 16,
 "EXPERT_HIDDEN_DIM": 1024,
 "EXPERT_NUM_LAYERS": 4,
 "TOP_K_EXPERTS": 4,
+```
+
 Which results in 63,418,800 trainable parameters (baseline gets 63,426,943).
 Energy Efficiency Results (Inferences per Joule):
 - Original MoE: 257.15 inferences/Joule
@@ -79,10 +86,13 @@ We're getting close to overcoming the expert overhead but still aren't there.
 Let's go bigger.
 
 ### The Turning Point: Where MoE Overtakes the Baseline 
+```
 "NUM_EXPERTS": 20,
 "EXPERT_HIDDEN_DIM": 2048,
 "EXPERT_NUM_LAYERS": 5,
 "TOP_K_EXPERTS": 5,
+```
+
 Which results in 368,287,260 trainable parameters (baseline gets 368,360,149).
 
 Energy Efficiency Results (Inferences per Joule):
@@ -102,6 +112,7 @@ over 50% of TDP for its average power.  So, we are seeing the impact of the comp
 density on the number of operations (which directly impacts the power) and which leads
 to our energy efficiency shifting in favor of the MoE even with its slower inference rate.
 
+```
 --- Optimized MoE Inference Timing ---
 Actual Duration: 30.0053 seconds
 Total Inferences: 472960
@@ -115,6 +126,7 @@ Total Inferences: 514560
 Inferences per Second: 17151.69
 Total Energy Consumed: 8969.24 Joules
 Average Power: 298.97 Watts
+```
 
 This power pattern is generally demonstrated across all three sized models where the MLP 
 model is generally drawing around 2x the power as the MoE.  Now I have a new question.
@@ -123,15 +135,19 @@ see some new properties emerge since at that point we should force close to full
 for both models.
 
 ### XXL 
+```
 "NUM_EXPERTS": 32,
 "EXPERT_HIDDEN_DIM": 4096,
 "EXPERT_NUM_LAYERS": 6,
 "TOP_K_EXPERTS": 8,
+```
+
 We get 2,789,237,600 trainable parameters in our MoE model (2,789,253,815 for Baseline).  This is still
 very small in the grand scheme of state-of-the-art MoE models (here is a good summary from the authors
 of the MoE optimization paper referenced later https://github.com/MoE-Inf/awesome-moe-inference/) but 
 big enough that we can almost saturate the single GPU compute we are using.
 
+```
 --- Optimized MoE Inference Timing ---
 Actual Duration: 30.0126 seconds
 Total Inferences: 122496
@@ -145,6 +161,7 @@ Total Inferences: 81024
 Inferences per Second: 2700.41
 Total Energy Consumed: 8741.06 Joules
 Average Power: 291.33 Watts
+```
 
 Or 
 Optimized MoE: 16.19 inferences/Joule
@@ -191,4 +208,3 @@ Intel(R) Xeon(R) Gold 6338 CPU @ 2.00GHz 12 vcpus
 Crusoe Cloud
 
 [1] https://arxiv.org/pdf/2412.14219 JIACHENG LIU, PENG TANG et el. A Survey on Inference Optimization Techniques for Mixture of Experts Models
-![image](https://github.com/user-attachments/assets/a5117d0d-c745-4e7b-ab35-ca7c51b822c3)
