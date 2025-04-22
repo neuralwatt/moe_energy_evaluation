@@ -174,10 +174,13 @@ finally overcoming the speed of the baseline as well.
 I've tried to keep this pretty simple and restricted to some basic measurements.
 There are certainly other techniques used with more advanced MoE architectures, optimizations,
 distributing layers to other gpus/cpus, mixed precision which I haven't bothered
-with but which do impact the energy efficiency.  I also limited the measurements
+with but which do impact the energy efficiency.  For example, we only used MLP as the baseline
+and expert design but most experts today are implemented with transformers and it would be 
+a good new experiment to do these same comparisons with that as the baseline (maybe a new post).
+I also limited the measurements
 in these tests to GPU power since those are the easiest to get but by doing the 
 inference in timebound blocks the rest of the system power should be roughly 
-equivalent between tests in this setup.
+equivalent between tests in this setup. [2]
 
 There is at least one paper which calls out the issue with the computational overhead
 added by the input/output layers.  
@@ -208,3 +211,4 @@ Intel(R) Xeon(R) Gold 6338 CPU @ 2.00GHz 12 vcpus
 Crusoe Cloud
 
 [1] https://arxiv.org/pdf/2412.14219 JIACHENG LIU, PENG TANG et el. A Survey on Inference Optimization Techniques for Mixture of Experts Models
+[2] https://huggingface.co/blog/moe
