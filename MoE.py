@@ -23,28 +23,36 @@ USE_LARGE_CONFIG = True
 
 # --- Model Size Configurations ---
 SMALL_CONFIG = {
-    "NUM_EXPERTS": 5,
+    "NUM_EXPERTS": 8,
     "EXPERT_HIDDEN_DIM": 256,
     "EXPERT_NUM_LAYERS": 3,
     "TOP_K_EXPERTS": 2,
 }
 
 LARGE_CONFIG = {
-    "NUM_EXPERTS": 12,
+    "NUM_EXPERTS": 16,
     "EXPERT_HIDDEN_DIM": 1024,
     "EXPERT_NUM_LAYERS": 4,
-    "TOP_K_EXPERTS": 2,
+    "TOP_K_EXPERTS": 4,
 }
 
 XLARGE_CONFIG = {
     "NUM_EXPERTS": 20,
     "EXPERT_HIDDEN_DIM": 2048,
     "EXPERT_NUM_LAYERS": 5,
-    "TOP_K_EXPERTS": 3,
+    "TOP_K_EXPERTS": 5,
 }
 
+# This configuration can't be loaded with the other models due to memory constraints
+# XXLARGE_CONFIG = {
+#     "NUM_EXPERTS": 32,
+#     "EXPERT_HIDDEN_DIM": 4096,
+#     "EXPERT_NUM_LAYERS": 6,
+#     "TOP_K_EXPERTS": 8,
+# }
+
 # Use selected configuration
-active_config = XLARGE_CONFIG if USE_LARGE_CONFIG else SMALL_CONFIG
+active_config = LARGE_CONFIG if USE_LARGE_CONFIG else SMALL_CONFIG
 
 
 # --- Configuration ---
@@ -155,7 +163,7 @@ def run_analysis(models_dict, dataset, device, moe_total_params):
     # --- Baseline Model Setup ---
     params_one_expert = calculate_params(INPUT_DIM, OUTPUT_DIM, EXPERT_HIDDEN_DIM, EXPERT_NUM_LAYERS)
     params_gating = INPUT_DIM * NUM_EXPERTS + NUM_EXPERTS
-    target_baseline_params = params_one_expert + params_gating
+    target_baseline_params = NUM_EXPERTS * params_one_expert + params_gating
     print(f"\nTarget Baseline Params (1 Expert + Gating): {target_baseline_params}")
     print(f"Using Baseline Config: Num Layers={BASELINE_NUM_LAYERS}")
     a = BASELINE_NUM_LAYERS - 1
@@ -209,56 +217,10 @@ def run_analysis(models_dict, dataset, device, moe_total_params):
         inf_count, inf_time, total_energy = time_inference(model_instance, dataset, device, INFERENCE_DURATION)
         timing_results[name] = {'count': inf_count, 'time': inf_time}
         energy_results[name] = total_energy
-    # --- End Inference Timing ---
+        # Add total trainable parameter size
+        total_params = sum(p.numel() for p in model_instance.parameters() if p.requires_grad)
+        print(f"{name} Total Trainable Parameters: {total_params}")# --- End Inference Timing ---
 
-
-    # --- FLOPs Estimation (Only for MoE and Baseline for comparison) ---
-    print("\n--- FLOPs Estimation ---")
-    moe_flops = 0
-    model_ref_for_flops = models_dict.get("Optimized MoE", models_dict.get("Original MoE"))
-    if model_ref_for_flops:
-        model_ref_for_flops.eval()
-        with torch.no_grad():
-            try:
-                x_sample, _ = next(iter(dataset))
-                x_sample = x_sample.to(device)
-                batch_size_current = x_sample.shape[0]
-                # Gating
-                moe_flops += 2 * x_sample.shape[1] * model_ref_for_flops.gating.out_features * batch_size_current
-                # Simplified FLOPs per expert (ignoring activations)
-                flops_per_expert_approx = 0
-                flops_per_expert_approx += 2 * INPUT_DIM * EXPERT_HIDDEN_DIM # Input layer
-                flops_per_expert_approx += (EXPERT_NUM_LAYERS - 1) * (2 * EXPERT_HIDDEN_DIM * EXPERT_HIDDEN_DIM) # Hidden layers
-                flops_per_expert_approx += 2 * EXPERT_HIDDEN_DIM * OUTPUT_DIM # Output layer
-                moe_flops += TOP_K_EXPERTS * flops_per_expert_approx * batch_size_current
-                # Combination
-                moe_flops += batch_size_current * TOP_K_EXPERTS * OUTPUT_DIM # Mult
-                moe_flops += batch_size_current * (TOP_K_EXPERTS) * OUTPUT_DIM # Add
-            except StopIteration: moe_flops = 0
-    else:
-        print("Could not find MoE model for FLOPs calculation.")
-
-
-    baseline_flops = 0
-    baseline_model.eval()
-    with torch.no_grad():
-        try:
-            x_sample, _ = next(iter(dataset))
-            x_sample = x_sample.to(device)
-            batch_size_current = x_sample.shape[0]
-            # Simplified FLOPs (ignoring activations)
-            baseline_flops += 2 * INPUT_DIM * baseline_model.hidden_dim * batch_size_current # Input layer
-            baseline_flops += (baseline_model.num_layers - 1) * (2 * baseline_model.hidden_dim * baseline_model.hidden_dim) * batch_size_current # Hidden layers
-            baseline_flops += 2 * baseline_model.hidden_dim * OUTPUT_DIM * batch_size_current # Output layer
-        except StopIteration: baseline_flops = 0
-
-    if baseline_flops > 0 and moe_flops > 0:
-        energy_savings = (baseline_flops - moe_flops) / baseline_flops * 100
-        print(f"Estimated MoE (Top-{TOP_K_EXPERTS}) FLOPs per batch: {moe_flops}")
-        print(f"Estimated Baseline FLOPs per batch: {baseline_flops}")
-        print(f"Estimated Energy Savings (based on FLOPs): {energy_savings:.2f}%")
-    else: print("FLOPs estimation skipped or incomplete.")
-    # --- End FLOPs Estimation ---
 
     # --- Final Accuracy Comparison ---
     print("\n--- Final Accuracy Comparison ---")

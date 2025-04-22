@@ -1,0 +1,320 @@
+Active configuration: SMALL
+Model parameters: Experts=8, Hidden Dim=256, Layers=3, Top-K=2
+Generating complex synthetic data...
+Data generation complete.
+Using device: cuda
+
+--- Original MoE Model ---
+ - Original MoE (Top-2) Architecture ---
+MoE(
+  (experts): ModuleList(
+    (0-7): 8 x Expert(
+      (net): Sequential(
+        (0): Linear(in_features=784, out_features=256, bias=True)
+        (1): ReLU()
+        (2): Linear(in_features=256, out_features=256, bias=True)
+        (3): ReLU()
+        (4): Linear(in_features=256, out_features=256, bias=True)
+        (5): ReLU()
+        (6): Linear(in_features=256, out_features=10, bias=True)
+      )
+    )
+  )
+  (gating): Linear(in_features=784, out_features=8, bias=True)
+)
+--- Parameters ---
+Layer: experts.0.net.0.weight, Parameters: 200704
+Layer: experts.0.net.0.bias, Parameters: 256
+Layer: experts.0.net.2.weight, Parameters: 65536
+Layer: experts.0.net.2.bias, Parameters: 256
+Layer: experts.0.net.4.weight, Parameters: 65536
+Layer: experts.0.net.4.bias, Parameters: 256
+Layer: experts.0.net.6.weight, Parameters: 2560
+Layer: experts.0.net.6.bias, Parameters: 10
+Layer: experts.1.net.0.weight, Parameters: 200704
+Layer: experts.1.net.0.bias, Parameters: 256
+Layer: experts.1.net.2.weight, Parameters: 65536
+Layer: experts.1.net.2.bias, Parameters: 256
+Layer: experts.1.net.4.weight, Parameters: 65536
+Layer: experts.1.net.4.bias, Parameters: 256
+Layer: experts.1.net.6.weight, Parameters: 2560
+Layer: experts.1.net.6.bias, Parameters: 10
+Layer: experts.2.net.0.weight, Parameters: 200704
+Layer: experts.2.net.0.bias, Parameters: 256
+Layer: experts.2.net.2.weight, Parameters: 65536
+Layer: experts.2.net.2.bias, Parameters: 256
+Layer: experts.2.net.4.weight, Parameters: 65536
+Layer: experts.2.net.4.bias, Parameters: 256
+Layer: experts.2.net.6.weight, Parameters: 2560
+Layer: experts.2.net.6.bias, Parameters: 10
+Layer: experts.3.net.0.weight, Parameters: 200704
+Layer: experts.3.net.0.bias, Parameters: 256
+Layer: experts.3.net.2.weight, Parameters: 65536
+Layer: experts.3.net.2.bias, Parameters: 256
+Layer: experts.3.net.4.weight, Parameters: 65536
+Layer: experts.3.net.4.bias, Parameters: 256
+Layer: experts.3.net.6.weight, Parameters: 2560
+Layer: experts.3.net.6.bias, Parameters: 10
+Layer: experts.4.net.0.weight, Parameters: 200704
+Layer: experts.4.net.0.bias, Parameters: 256
+Layer: experts.4.net.2.weight, Parameters: 65536
+Layer: experts.4.net.2.bias, Parameters: 256
+Layer: experts.4.net.4.weight, Parameters: 65536
+Layer: experts.4.net.4.bias, Parameters: 256
+Layer: experts.4.net.6.weight, Parameters: 2560
+Layer: experts.4.net.6.bias, Parameters: 10
+Layer: experts.5.net.0.weight, Parameters: 200704
+Layer: experts.5.net.0.bias, Parameters: 256
+Layer: experts.5.net.2.weight, Parameters: 65536
+Layer: experts.5.net.2.bias, Parameters: 256
+Layer: experts.5.net.4.weight, Parameters: 65536
+Layer: experts.5.net.4.bias, Parameters: 256
+Layer: experts.5.net.6.weight, Parameters: 2560
+Layer: experts.5.net.6.bias, Parameters: 10
+Layer: experts.6.net.0.weight, Parameters: 200704
+Layer: experts.6.net.0.bias, Parameters: 256
+Layer: experts.6.net.2.weight, Parameters: 65536
+Layer: experts.6.net.2.bias, Parameters: 256
+Layer: experts.6.net.4.weight, Parameters: 65536
+Layer: experts.6.net.4.bias, Parameters: 256
+Layer: experts.6.net.6.weight, Parameters: 2560
+Layer: experts.6.net.6.bias, Parameters: 10
+Layer: experts.7.net.0.weight, Parameters: 200704
+Layer: experts.7.net.0.bias, Parameters: 256
+Layer: experts.7.net.2.weight, Parameters: 65536
+Layer: experts.7.net.2.bias, Parameters: 256
+Layer: experts.7.net.4.weight, Parameters: 65536
+Layer: experts.7.net.4.bias, Parameters: 256
+Layer: experts.7.net.6.weight, Parameters: 2560
+Layer: experts.7.net.6.bias, Parameters: 10
+Layer: gating.weight, Parameters: 6272
+Layer: gating.bias, Parameters: 8
+Total Trainable Parameters: 2687192
+--------------------------------------------
+
+--- Optimized MoE Model ---
+ - Optimized MoE (Top-2) Architecture ---
+OptimizedMoE2(
+  (experts): ModuleList(
+    (0-7): 8 x Expert(
+      (net): Sequential(
+        (0): Linear(in_features=784, out_features=256, bias=True)
+        (1): ReLU()
+        (2): Linear(in_features=256, out_features=256, bias=True)
+        (3): ReLU()
+        (4): Linear(in_features=256, out_features=256, bias=True)
+        (5): ReLU()
+        (6): Linear(in_features=256, out_features=10, bias=True)
+      )
+    )
+  )
+  (gating): Linear(in_features=784, out_features=8, bias=True)
+)
+--- Parameters ---
+Layer: experts.0.net.0.weight, Parameters: 200704
+Layer: experts.0.net.0.bias, Parameters: 256
+Layer: experts.0.net.2.weight, Parameters: 65536
+Layer: experts.0.net.2.bias, Parameters: 256
+Layer: experts.0.net.4.weight, Parameters: 65536
+Layer: experts.0.net.4.bias, Parameters: 256
+Layer: experts.0.net.6.weight, Parameters: 2560
+Layer: experts.0.net.6.bias, Parameters: 10
+Layer: experts.1.net.0.weight, Parameters: 200704
+Layer: experts.1.net.0.bias, Parameters: 256
+Layer: experts.1.net.2.weight, Parameters: 65536
+Layer: experts.1.net.2.bias, Parameters: 256
+Layer: experts.1.net.4.weight, Parameters: 65536
+Layer: experts.1.net.4.bias, Parameters: 256
+Layer: experts.1.net.6.weight, Parameters: 2560
+Layer: experts.1.net.6.bias, Parameters: 10
+Layer: experts.2.net.0.weight, Parameters: 200704
+Layer: experts.2.net.0.bias, Parameters: 256
+Layer: experts.2.net.2.weight, Parameters: 65536
+Layer: experts.2.net.2.bias, Parameters: 256
+Layer: experts.2.net.4.weight, Parameters: 65536
+Layer: experts.2.net.4.bias, Parameters: 256
+Layer: experts.2.net.6.weight, Parameters: 2560
+Layer: experts.2.net.6.bias, Parameters: 10
+Layer: experts.3.net.0.weight, Parameters: 200704
+Layer: experts.3.net.0.bias, Parameters: 256
+Layer: experts.3.net.2.weight, Parameters: 65536
+Layer: experts.3.net.2.bias, Parameters: 256
+Layer: experts.3.net.4.weight, Parameters: 65536
+Layer: experts.3.net.4.bias, Parameters: 256
+Layer: experts.3.net.6.weight, Parameters: 2560
+Layer: experts.3.net.6.bias, Parameters: 10
+Layer: experts.4.net.0.weight, Parameters: 200704
+Layer: experts.4.net.0.bias, Parameters: 256
+Layer: experts.4.net.2.weight, Parameters: 65536
+Layer: experts.4.net.2.bias, Parameters: 256
+Layer: experts.4.net.4.weight, Parameters: 65536
+Layer: experts.4.net.4.bias, Parameters: 256
+Layer: experts.4.net.6.weight, Parameters: 2560
+Layer: experts.4.net.6.bias, Parameters: 10
+Layer: experts.5.net.0.weight, Parameters: 200704
+Layer: experts.5.net.0.bias, Parameters: 256
+Layer: experts.5.net.2.weight, Parameters: 65536
+Layer: experts.5.net.2.bias, Parameters: 256
+Layer: experts.5.net.4.weight, Parameters: 65536
+Layer: experts.5.net.4.bias, Parameters: 256
+Layer: experts.5.net.6.weight, Parameters: 2560
+Layer: experts.5.net.6.bias, Parameters: 10
+Layer: experts.6.net.0.weight, Parameters: 200704
+Layer: experts.6.net.0.bias, Parameters: 256
+Layer: experts.6.net.2.weight, Parameters: 65536
+Layer: experts.6.net.2.bias, Parameters: 256
+Layer: experts.6.net.4.weight, Parameters: 65536
+Layer: experts.6.net.4.bias, Parameters: 256
+Layer: experts.6.net.6.weight, Parameters: 2560
+Layer: experts.6.net.6.bias, Parameters: 10
+Layer: experts.7.net.0.weight, Parameters: 200704
+Layer: experts.7.net.0.bias, Parameters: 256
+Layer: experts.7.net.2.weight, Parameters: 65536
+Layer: experts.7.net.2.bias, Parameters: 256
+Layer: experts.7.net.4.weight, Parameters: 65536
+Layer: experts.7.net.4.bias, Parameters: 256
+Layer: experts.7.net.6.weight, Parameters: 2560
+Layer: experts.7.net.6.bias, Parameters: 10
+Layer: gating.weight, Parameters: 6272
+Layer: gating.bias, Parameters: 8
+Total Trainable Parameters: 2687192
+---------------------------------------------
+
+Training Original MoE model for 15 epochs...
+Epoch 1/15, Loss: 2.2778, Accuracy: 13.31%
+Epoch 2/15, Loss: 1.5939, Accuracy: 47.77%
+Epoch 3/15, Loss: 0.4847, Accuracy: 85.68%
+Epoch 4/15, Loss: 0.1479, Accuracy: 95.61%
+Epoch 5/15, Loss: 0.0659, Accuracy: 98.10%
+Epoch 6/15, Loss: 0.0310, Accuracy: 99.15%
+Epoch 7/15, Loss: 0.0196, Accuracy: 99.48%
+Epoch 8/15, Loss: 0.0128, Accuracy: 99.72%
+Epoch 9/15, Loss: 0.0138, Accuracy: 99.60%
+Epoch 10/15, Loss: 0.0258, Accuracy: 99.41%
+Epoch 11/15, Loss: 0.0773, Accuracy: 97.82%
+Epoch 12/15, Loss: 0.3368, Accuracy: 89.85%
+Epoch 13/15, Loss: 0.2026, Accuracy: 93.86%
+Epoch 14/15, Loss: 0.0610, Accuracy: 98.40%
+Epoch 15/15, Loss: 0.0244, Accuracy: 99.26%
+
+Training Optimized MoE model for 15 epochs...
+Epoch 1/15, Loss: 2.2776, Accuracy: 13.64%
+Epoch 2/15, Loss: 1.6021, Accuracy: 46.90%
+Epoch 3/15, Loss: 0.4770, Accuracy: 86.70%
+Epoch 4/15, Loss: 0.1629, Accuracy: 95.10%
+Epoch 5/15, Loss: 0.0702, Accuracy: 98.06%
+Epoch 6/15, Loss: 0.0469, Accuracy: 98.76%
+Epoch 7/15, Loss: 0.0359, Accuracy: 99.03%
+Epoch 8/15, Loss: 0.0309, Accuracy: 99.25%
+Epoch 9/15, Loss: 0.0724, Accuracy: 98.04%
+Epoch 10/15, Loss: 0.1134, Accuracy: 96.75%
+Epoch 11/15, Loss: 0.1000, Accuracy: 96.99%
+Epoch 12/15, Loss: 0.0927, Accuracy: 97.14%
+Epoch 13/15, Loss: 0.0571, Accuracy: 98.28%
+Epoch 14/15, Loss: 0.0430, Accuracy: 98.72%
+Epoch 15/15, Loss: 0.0296, Accuracy: 99.17%
+
+Target Baseline Params (1 Expert + Gating): 2687192
+Using Baseline Config: Num Layers=3
+Calculated Baseline Hidden Dimension (Approx): 977
+ - Baseline Model Architecture ---
+BaselineMLP(
+  (net): Sequential(
+    (0): Linear(in_features=784, out_features=977, bias=True)
+    (1): ReLU()
+    (2): Linear(in_features=977, out_features=977, bias=True)
+    (3): ReLU()
+    (4): Linear(in_features=977, out_features=977, bias=True)
+    (5): ReLU()
+    (6): Linear(in_features=977, out_features=10, bias=True)
+  )
+)
+--- Parameters ---
+Layer: net.0.weight, Parameters: 765968
+Layer: net.0.bias, Parameters: 977
+Layer: net.2.weight, Parameters: 954529
+Layer: net.2.bias, Parameters: 977
+Layer: net.4.weight, Parameters: 954529
+Layer: net.4.bias, Parameters: 977
+Layer: net.6.weight, Parameters: 9770
+Layer: net.6.bias, Parameters: 10
+Total Trainable Parameters: 2687737
+--------------------------------------
+Target Baseline Params: 2687192, Actual Baseline Params: 2687737
+
+Training Baseline model for 15 epochs...
+Epoch 1/15, Loss: 2.1536, Accuracy: 19.84%
+Epoch 2/15, Loss: 1.3130, Accuracy: 55.46%
+Epoch 3/15, Loss: 0.6110, Accuracy: 79.13%
+Epoch 4/15, Loss: 0.2536, Accuracy: 91.10%
+Epoch 5/15, Loss: 0.0996, Accuracy: 96.59%
+Epoch 6/15, Loss: 0.1044, Accuracy: 96.50%
+Epoch 7/15, Loss: 0.1448, Accuracy: 95.19%
+Epoch 8/15, Loss: 0.1290, Accuracy: 95.65%
+Epoch 9/15, Loss: 0.0584, Accuracy: 98.18%
+Epoch 10/15, Loss: 0.0397, Accuracy: 98.60%
+Epoch 11/15, Loss: 0.0403, Accuracy: 98.50%
+Epoch 12/15, Loss: 0.0723, Accuracy: 97.79%
+Epoch 13/15, Loss: 0.1041, Accuracy: 96.40%
+Epoch 14/15, Loss: 0.0573, Accuracy: 98.11%
+Epoch 15/15, Loss: 0.0866, Accuracy: 97.01%
+
+--- Original MoE Inference Timing ---
+Starting inference timing for 30 seconds...
+Start Time: 2025-04-22 02:01:14
+NVML initialized for GPU 0.
+NVML shut down.
+End Time:   2025-04-22 02:01:44
+Actual Duration: 30.0016 seconds
+Total Inferences: 1625728
+Inferences per Second: 54188.06
+Total Energy Consumed: 2079.73 Joules
+Average Power: 69.32 Watts
+Original MoE Total Trainable Parameters: 2687192
+
+--- Optimized MoE Inference Timing ---
+Starting inference timing for 30 seconds...
+Start Time: 2025-04-22 02:01:44
+NVML initialized for GPU 0.
+NVML shut down.
+End Time:   2025-04-22 02:02:14
+Actual Duration: 30.0006 seconds
+Total Inferences: 1688960
+Inferences per Second: 56297.62
+Total Energy Consumed: 2092.53 Joules
+Average Power: 69.75 Watts
+Optimized MoE Total Trainable Parameters: 2687192
+
+--- Baseline Inference Timing ---
+Starting inference timing for 30 seconds...
+Start Time: 2025-04-22 02:02:14
+NVML initialized for GPU 0.
+NVML shut down.
+End Time:   2025-04-22 02:02:44
+Actual Duration: 30.0001 seconds
+Total Inferences: 23885184
+Inferences per Second: 796170.08
+Total Energy Consumed: 4176.25 Joules
+Average Power: 139.21 Watts
+Baseline Total Trainable Parameters: 2687737
+
+--- Final Accuracy Comparison ---
+Original MoE Final Accuracy: 99.76%
+Optimized MoE Final Accuracy: 99.64%
+Baseline Final Accuracy: 99.36%
+
+--- Summary ---
+Timing Results (Inferences per Second):
+- Original MoE: 54188.06
+- Optimized MoE: 56297.62
+- Baseline: 796170.08
+
+Accuracy Results:
+- Original MoE: 99.76%
+- Optimized MoE: 99.64%
+- Baseline: 99.36%
+
+Energy Efficiency Results (Inferences per Joule):
+- Original MoE: 781.70 inferences/Joule
+- Optimized MoE: 807.14 inferences/Joule
+- Baseline: 5719.30 inferences/Joule

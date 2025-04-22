@@ -1,0 +1,688 @@
+Active configuration: LARGE
+Model parameters: Experts=20, Hidden Dim=2048, Layers=5, Top-K=5
+Generating complex synthetic data...
+Data generation complete.
+Using device: cuda
+
+--- Original MoE Model ---
+ - Original MoE (Top-5) Architecture ---
+MoE(
+  (experts): ModuleList(
+    (0-19): 20 x Expert(
+      (net): Sequential(
+        (0): Linear(in_features=784, out_features=2048, bias=True)
+        (1): ReLU()
+        (2): Linear(in_features=2048, out_features=2048, bias=True)
+        (3): ReLU()
+        (4): Linear(in_features=2048, out_features=2048, bias=True)
+        (5): ReLU()
+        (6): Linear(in_features=2048, out_features=2048, bias=True)
+        (7): ReLU()
+        (8): Linear(in_features=2048, out_features=2048, bias=True)
+        (9): ReLU()
+        (10): Linear(in_features=2048, out_features=10, bias=True)
+      )
+    )
+  )
+  (gating): Linear(in_features=784, out_features=20, bias=True)
+)
+--- Parameters ---
+Layer: experts.0.net.0.weight, Parameters: 1605632
+Layer: experts.0.net.0.bias, Parameters: 2048
+Layer: experts.0.net.2.weight, Parameters: 4194304
+Layer: experts.0.net.2.bias, Parameters: 2048
+Layer: experts.0.net.4.weight, Parameters: 4194304
+Layer: experts.0.net.4.bias, Parameters: 2048
+Layer: experts.0.net.6.weight, Parameters: 4194304
+Layer: experts.0.net.6.bias, Parameters: 2048
+Layer: experts.0.net.8.weight, Parameters: 4194304
+Layer: experts.0.net.8.bias, Parameters: 2048
+Layer: experts.0.net.10.weight, Parameters: 20480
+Layer: experts.0.net.10.bias, Parameters: 10
+Layer: experts.1.net.0.weight, Parameters: 1605632
+Layer: experts.1.net.0.bias, Parameters: 2048
+Layer: experts.1.net.2.weight, Parameters: 4194304
+Layer: experts.1.net.2.bias, Parameters: 2048
+Layer: experts.1.net.4.weight, Parameters: 4194304
+Layer: experts.1.net.4.bias, Parameters: 2048
+Layer: experts.1.net.6.weight, Parameters: 4194304
+Layer: experts.1.net.6.bias, Parameters: 2048
+Layer: experts.1.net.8.weight, Parameters: 4194304
+Layer: experts.1.net.8.bias, Parameters: 2048
+Layer: experts.1.net.10.weight, Parameters: 20480
+Layer: experts.1.net.10.bias, Parameters: 10
+Layer: experts.2.net.0.weight, Parameters: 1605632
+Layer: experts.2.net.0.bias, Parameters: 2048
+Layer: experts.2.net.2.weight, Parameters: 4194304
+Layer: experts.2.net.2.bias, Parameters: 2048
+Layer: experts.2.net.4.weight, Parameters: 4194304
+Layer: experts.2.net.4.bias, Parameters: 2048
+Layer: experts.2.net.6.weight, Parameters: 4194304
+Layer: experts.2.net.6.bias, Parameters: 2048
+Layer: experts.2.net.8.weight, Parameters: 4194304
+Layer: experts.2.net.8.bias, Parameters: 2048
+Layer: experts.2.net.10.weight, Parameters: 20480
+Layer: experts.2.net.10.bias, Parameters: 10
+Layer: experts.3.net.0.weight, Parameters: 1605632
+Layer: experts.3.net.0.bias, Parameters: 2048
+Layer: experts.3.net.2.weight, Parameters: 4194304
+Layer: experts.3.net.2.bias, Parameters: 2048
+Layer: experts.3.net.4.weight, Parameters: 4194304
+Layer: experts.3.net.4.bias, Parameters: 2048
+Layer: experts.3.net.6.weight, Parameters: 4194304
+Layer: experts.3.net.6.bias, Parameters: 2048
+Layer: experts.3.net.8.weight, Parameters: 4194304
+Layer: experts.3.net.8.bias, Parameters: 2048
+Layer: experts.3.net.10.weight, Parameters: 20480
+Layer: experts.3.net.10.bias, Parameters: 10
+Layer: experts.4.net.0.weight, Parameters: 1605632
+Layer: experts.4.net.0.bias, Parameters: 2048
+Layer: experts.4.net.2.weight, Parameters: 4194304
+Layer: experts.4.net.2.bias, Parameters: 2048
+Layer: experts.4.net.4.weight, Parameters: 4194304
+Layer: experts.4.net.4.bias, Parameters: 2048
+Layer: experts.4.net.6.weight, Parameters: 4194304
+Layer: experts.4.net.6.bias, Parameters: 2048
+Layer: experts.4.net.8.weight, Parameters: 4194304
+Layer: experts.4.net.8.bias, Parameters: 2048
+Layer: experts.4.net.10.weight, Parameters: 20480
+Layer: experts.4.net.10.bias, Parameters: 10
+Layer: experts.5.net.0.weight, Parameters: 1605632
+Layer: experts.5.net.0.bias, Parameters: 2048
+Layer: experts.5.net.2.weight, Parameters: 4194304
+Layer: experts.5.net.2.bias, Parameters: 2048
+Layer: experts.5.net.4.weight, Parameters: 4194304
+Layer: experts.5.net.4.bias, Parameters: 2048
+Layer: experts.5.net.6.weight, Parameters: 4194304
+Layer: experts.5.net.6.bias, Parameters: 2048
+Layer: experts.5.net.8.weight, Parameters: 4194304
+Layer: experts.5.net.8.bias, Parameters: 2048
+Layer: experts.5.net.10.weight, Parameters: 20480
+Layer: experts.5.net.10.bias, Parameters: 10
+Layer: experts.6.net.0.weight, Parameters: 1605632
+Layer: experts.6.net.0.bias, Parameters: 2048
+Layer: experts.6.net.2.weight, Parameters: 4194304
+Layer: experts.6.net.2.bias, Parameters: 2048
+Layer: experts.6.net.4.weight, Parameters: 4194304
+Layer: experts.6.net.4.bias, Parameters: 2048
+Layer: experts.6.net.6.weight, Parameters: 4194304
+Layer: experts.6.net.6.bias, Parameters: 2048
+Layer: experts.6.net.8.weight, Parameters: 4194304
+Layer: experts.6.net.8.bias, Parameters: 2048
+Layer: experts.6.net.10.weight, Parameters: 20480
+Layer: experts.6.net.10.bias, Parameters: 10
+Layer: experts.7.net.0.weight, Parameters: 1605632
+Layer: experts.7.net.0.bias, Parameters: 2048
+Layer: experts.7.net.2.weight, Parameters: 4194304
+Layer: experts.7.net.2.bias, Parameters: 2048
+Layer: experts.7.net.4.weight, Parameters: 4194304
+Layer: experts.7.net.4.bias, Parameters: 2048
+Layer: experts.7.net.6.weight, Parameters: 4194304
+Layer: experts.7.net.6.bias, Parameters: 2048
+Layer: experts.7.net.8.weight, Parameters: 4194304
+Layer: experts.7.net.8.bias, Parameters: 2048
+Layer: experts.7.net.10.weight, Parameters: 20480
+Layer: experts.7.net.10.bias, Parameters: 10
+Layer: experts.8.net.0.weight, Parameters: 1605632
+Layer: experts.8.net.0.bias, Parameters: 2048
+Layer: experts.8.net.2.weight, Parameters: 4194304
+Layer: experts.8.net.2.bias, Parameters: 2048
+Layer: experts.8.net.4.weight, Parameters: 4194304
+Layer: experts.8.net.4.bias, Parameters: 2048
+Layer: experts.8.net.6.weight, Parameters: 4194304
+Layer: experts.8.net.6.bias, Parameters: 2048
+Layer: experts.8.net.8.weight, Parameters: 4194304
+Layer: experts.8.net.8.bias, Parameters: 2048
+Layer: experts.8.net.10.weight, Parameters: 20480
+Layer: experts.8.net.10.bias, Parameters: 10
+Layer: experts.9.net.0.weight, Parameters: 1605632
+Layer: experts.9.net.0.bias, Parameters: 2048
+Layer: experts.9.net.2.weight, Parameters: 4194304
+Layer: experts.9.net.2.bias, Parameters: 2048
+Layer: experts.9.net.4.weight, Parameters: 4194304
+Layer: experts.9.net.4.bias, Parameters: 2048
+Layer: experts.9.net.6.weight, Parameters: 4194304
+Layer: experts.9.net.6.bias, Parameters: 2048
+Layer: experts.9.net.8.weight, Parameters: 4194304
+Layer: experts.9.net.8.bias, Parameters: 2048
+Layer: experts.9.net.10.weight, Parameters: 20480
+Layer: experts.9.net.10.bias, Parameters: 10
+Layer: experts.10.net.0.weight, Parameters: 1605632
+Layer: experts.10.net.0.bias, Parameters: 2048
+Layer: experts.10.net.2.weight, Parameters: 4194304
+Layer: experts.10.net.2.bias, Parameters: 2048
+Layer: experts.10.net.4.weight, Parameters: 4194304
+Layer: experts.10.net.4.bias, Parameters: 2048
+Layer: experts.10.net.6.weight, Parameters: 4194304
+Layer: experts.10.net.6.bias, Parameters: 2048
+Layer: experts.10.net.8.weight, Parameters: 4194304
+Layer: experts.10.net.8.bias, Parameters: 2048
+Layer: experts.10.net.10.weight, Parameters: 20480
+Layer: experts.10.net.10.bias, Parameters: 10
+Layer: experts.11.net.0.weight, Parameters: 1605632
+Layer: experts.11.net.0.bias, Parameters: 2048
+Layer: experts.11.net.2.weight, Parameters: 4194304
+Layer: experts.11.net.2.bias, Parameters: 2048
+Layer: experts.11.net.4.weight, Parameters: 4194304
+Layer: experts.11.net.4.bias, Parameters: 2048
+Layer: experts.11.net.6.weight, Parameters: 4194304
+Layer: experts.11.net.6.bias, Parameters: 2048
+Layer: experts.11.net.8.weight, Parameters: 4194304
+Layer: experts.11.net.8.bias, Parameters: 2048
+Layer: experts.11.net.10.weight, Parameters: 20480
+Layer: experts.11.net.10.bias, Parameters: 10
+Layer: experts.12.net.0.weight, Parameters: 1605632
+Layer: experts.12.net.0.bias, Parameters: 2048
+Layer: experts.12.net.2.weight, Parameters: 4194304
+Layer: experts.12.net.2.bias, Parameters: 2048
+Layer: experts.12.net.4.weight, Parameters: 4194304
+Layer: experts.12.net.4.bias, Parameters: 2048
+Layer: experts.12.net.6.weight, Parameters: 4194304
+Layer: experts.12.net.6.bias, Parameters: 2048
+Layer: experts.12.net.8.weight, Parameters: 4194304
+Layer: experts.12.net.8.bias, Parameters: 2048
+Layer: experts.12.net.10.weight, Parameters: 20480
+Layer: experts.12.net.10.bias, Parameters: 10
+Layer: experts.13.net.0.weight, Parameters: 1605632
+Layer: experts.13.net.0.bias, Parameters: 2048
+Layer: experts.13.net.2.weight, Parameters: 4194304
+Layer: experts.13.net.2.bias, Parameters: 2048
+Layer: experts.13.net.4.weight, Parameters: 4194304
+Layer: experts.13.net.4.bias, Parameters: 2048
+Layer: experts.13.net.6.weight, Parameters: 4194304
+Layer: experts.13.net.6.bias, Parameters: 2048
+Layer: experts.13.net.8.weight, Parameters: 4194304
+Layer: experts.13.net.8.bias, Parameters: 2048
+Layer: experts.13.net.10.weight, Parameters: 20480
+Layer: experts.13.net.10.bias, Parameters: 10
+Layer: experts.14.net.0.weight, Parameters: 1605632
+Layer: experts.14.net.0.bias, Parameters: 2048
+Layer: experts.14.net.2.weight, Parameters: 4194304
+Layer: experts.14.net.2.bias, Parameters: 2048
+Layer: experts.14.net.4.weight, Parameters: 4194304
+Layer: experts.14.net.4.bias, Parameters: 2048
+Layer: experts.14.net.6.weight, Parameters: 4194304
+Layer: experts.14.net.6.bias, Parameters: 2048
+Layer: experts.14.net.8.weight, Parameters: 4194304
+Layer: experts.14.net.8.bias, Parameters: 2048
+Layer: experts.14.net.10.weight, Parameters: 20480
+Layer: experts.14.net.10.bias, Parameters: 10
+Layer: experts.15.net.0.weight, Parameters: 1605632
+Layer: experts.15.net.0.bias, Parameters: 2048
+Layer: experts.15.net.2.weight, Parameters: 4194304
+Layer: experts.15.net.2.bias, Parameters: 2048
+Layer: experts.15.net.4.weight, Parameters: 4194304
+Layer: experts.15.net.4.bias, Parameters: 2048
+Layer: experts.15.net.6.weight, Parameters: 4194304
+Layer: experts.15.net.6.bias, Parameters: 2048
+Layer: experts.15.net.8.weight, Parameters: 4194304
+Layer: experts.15.net.8.bias, Parameters: 2048
+Layer: experts.15.net.10.weight, Parameters: 20480
+Layer: experts.15.net.10.bias, Parameters: 10
+Layer: experts.16.net.0.weight, Parameters: 1605632
+Layer: experts.16.net.0.bias, Parameters: 2048
+Layer: experts.16.net.2.weight, Parameters: 4194304
+Layer: experts.16.net.2.bias, Parameters: 2048
+Layer: experts.16.net.4.weight, Parameters: 4194304
+Layer: experts.16.net.4.bias, Parameters: 2048
+Layer: experts.16.net.6.weight, Parameters: 4194304
+Layer: experts.16.net.6.bias, Parameters: 2048
+Layer: experts.16.net.8.weight, Parameters: 4194304
+Layer: experts.16.net.8.bias, Parameters: 2048
+Layer: experts.16.net.10.weight, Parameters: 20480
+Layer: experts.16.net.10.bias, Parameters: 10
+Layer: experts.17.net.0.weight, Parameters: 1605632
+Layer: experts.17.net.0.bias, Parameters: 2048
+Layer: experts.17.net.2.weight, Parameters: 4194304
+Layer: experts.17.net.2.bias, Parameters: 2048
+Layer: experts.17.net.4.weight, Parameters: 4194304
+Layer: experts.17.net.4.bias, Parameters: 2048
+Layer: experts.17.net.6.weight, Parameters: 4194304
+Layer: experts.17.net.6.bias, Parameters: 2048
+Layer: experts.17.net.8.weight, Parameters: 4194304
+Layer: experts.17.net.8.bias, Parameters: 2048
+Layer: experts.17.net.10.weight, Parameters: 20480
+Layer: experts.17.net.10.bias, Parameters: 10
+Layer: experts.18.net.0.weight, Parameters: 1605632
+Layer: experts.18.net.0.bias, Parameters: 2048
+Layer: experts.18.net.2.weight, Parameters: 4194304
+Layer: experts.18.net.2.bias, Parameters: 2048
+Layer: experts.18.net.4.weight, Parameters: 4194304
+Layer: experts.18.net.4.bias, Parameters: 2048
+Layer: experts.18.net.6.weight, Parameters: 4194304
+Layer: experts.18.net.6.bias, Parameters: 2048
+Layer: experts.18.net.8.weight, Parameters: 4194304
+Layer: experts.18.net.8.bias, Parameters: 2048
+Layer: experts.18.net.10.weight, Parameters: 20480
+Layer: experts.18.net.10.bias, Parameters: 10
+Layer: experts.19.net.0.weight, Parameters: 1605632
+Layer: experts.19.net.0.bias, Parameters: 2048
+Layer: experts.19.net.2.weight, Parameters: 4194304
+Layer: experts.19.net.2.bias, Parameters: 2048
+Layer: experts.19.net.4.weight, Parameters: 4194304
+Layer: experts.19.net.4.bias, Parameters: 2048
+Layer: experts.19.net.6.weight, Parameters: 4194304
+Layer: experts.19.net.6.bias, Parameters: 2048
+Layer: experts.19.net.8.weight, Parameters: 4194304
+Layer: experts.19.net.8.bias, Parameters: 2048
+Layer: experts.19.net.10.weight, Parameters: 20480
+Layer: experts.19.net.10.bias, Parameters: 10
+Layer: gating.weight, Parameters: 15680
+Layer: gating.bias, Parameters: 20
+Total Trainable Parameters: 368287260
+--------------------------------------------
+
+--- Optimized MoE Model ---
+ - Optimized MoE (Top-5) Architecture ---
+OptimizedMoE2(
+  (experts): ModuleList(
+    (0-19): 20 x Expert(
+      (net): Sequential(
+        (0): Linear(in_features=784, out_features=2048, bias=True)
+        (1): ReLU()
+        (2): Linear(in_features=2048, out_features=2048, bias=True)
+        (3): ReLU()
+        (4): Linear(in_features=2048, out_features=2048, bias=True)
+        (5): ReLU()
+        (6): Linear(in_features=2048, out_features=2048, bias=True)
+        (7): ReLU()
+        (8): Linear(in_features=2048, out_features=2048, bias=True)
+        (9): ReLU()
+        (10): Linear(in_features=2048, out_features=10, bias=True)
+      )
+    )
+  )
+  (gating): Linear(in_features=784, out_features=20, bias=True)
+)
+--- Parameters ---
+Layer: experts.0.net.0.weight, Parameters: 1605632
+Layer: experts.0.net.0.bias, Parameters: 2048
+Layer: experts.0.net.2.weight, Parameters: 4194304
+Layer: experts.0.net.2.bias, Parameters: 2048
+Layer: experts.0.net.4.weight, Parameters: 4194304
+Layer: experts.0.net.4.bias, Parameters: 2048
+Layer: experts.0.net.6.weight, Parameters: 4194304
+Layer: experts.0.net.6.bias, Parameters: 2048
+Layer: experts.0.net.8.weight, Parameters: 4194304
+Layer: experts.0.net.8.bias, Parameters: 2048
+Layer: experts.0.net.10.weight, Parameters: 20480
+Layer: experts.0.net.10.bias, Parameters: 10
+Layer: experts.1.net.0.weight, Parameters: 1605632
+Layer: experts.1.net.0.bias, Parameters: 2048
+Layer: experts.1.net.2.weight, Parameters: 4194304
+Layer: experts.1.net.2.bias, Parameters: 2048
+Layer: experts.1.net.4.weight, Parameters: 4194304
+Layer: experts.1.net.4.bias, Parameters: 2048
+Layer: experts.1.net.6.weight, Parameters: 4194304
+Layer: experts.1.net.6.bias, Parameters: 2048
+Layer: experts.1.net.8.weight, Parameters: 4194304
+Layer: experts.1.net.8.bias, Parameters: 2048
+Layer: experts.1.net.10.weight, Parameters: 20480
+Layer: experts.1.net.10.bias, Parameters: 10
+Layer: experts.2.net.0.weight, Parameters: 1605632
+Layer: experts.2.net.0.bias, Parameters: 2048
+Layer: experts.2.net.2.weight, Parameters: 4194304
+Layer: experts.2.net.2.bias, Parameters: 2048
+Layer: experts.2.net.4.weight, Parameters: 4194304
+Layer: experts.2.net.4.bias, Parameters: 2048
+Layer: experts.2.net.6.weight, Parameters: 4194304
+Layer: experts.2.net.6.bias, Parameters: 2048
+Layer: experts.2.net.8.weight, Parameters: 4194304
+Layer: experts.2.net.8.bias, Parameters: 2048
+Layer: experts.2.net.10.weight, Parameters: 20480
+Layer: experts.2.net.10.bias, Parameters: 10
+Layer: experts.3.net.0.weight, Parameters: 1605632
+Layer: experts.3.net.0.bias, Parameters: 2048
+Layer: experts.3.net.2.weight, Parameters: 4194304
+Layer: experts.3.net.2.bias, Parameters: 2048
+Layer: experts.3.net.4.weight, Parameters: 4194304
+Layer: experts.3.net.4.bias, Parameters: 2048
+Layer: experts.3.net.6.weight, Parameters: 4194304
+Layer: experts.3.net.6.bias, Parameters: 2048
+Layer: experts.3.net.8.weight, Parameters: 4194304
+Layer: experts.3.net.8.bias, Parameters: 2048
+Layer: experts.3.net.10.weight, Parameters: 20480
+Layer: experts.3.net.10.bias, Parameters: 10
+Layer: experts.4.net.0.weight, Parameters: 1605632
+Layer: experts.4.net.0.bias, Parameters: 2048
+Layer: experts.4.net.2.weight, Parameters: 4194304
+Layer: experts.4.net.2.bias, Parameters: 2048
+Layer: experts.4.net.4.weight, Parameters: 4194304
+Layer: experts.4.net.4.bias, Parameters: 2048
+Layer: experts.4.net.6.weight, Parameters: 4194304
+Layer: experts.4.net.6.bias, Parameters: 2048
+Layer: experts.4.net.8.weight, Parameters: 4194304
+Layer: experts.4.net.8.bias, Parameters: 2048
+Layer: experts.4.net.10.weight, Parameters: 20480
+Layer: experts.4.net.10.bias, Parameters: 10
+Layer: experts.5.net.0.weight, Parameters: 1605632
+Layer: experts.5.net.0.bias, Parameters: 2048
+Layer: experts.5.net.2.weight, Parameters: 4194304
+Layer: experts.5.net.2.bias, Parameters: 2048
+Layer: experts.5.net.4.weight, Parameters: 4194304
+Layer: experts.5.net.4.bias, Parameters: 2048
+Layer: experts.5.net.6.weight, Parameters: 4194304
+Layer: experts.5.net.6.bias, Parameters: 2048
+Layer: experts.5.net.8.weight, Parameters: 4194304
+Layer: experts.5.net.8.bias, Parameters: 2048
+Layer: experts.5.net.10.weight, Parameters: 20480
+Layer: experts.5.net.10.bias, Parameters: 10
+Layer: experts.6.net.0.weight, Parameters: 1605632
+Layer: experts.6.net.0.bias, Parameters: 2048
+Layer: experts.6.net.2.weight, Parameters: 4194304
+Layer: experts.6.net.2.bias, Parameters: 2048
+Layer: experts.6.net.4.weight, Parameters: 4194304
+Layer: experts.6.net.4.bias, Parameters: 2048
+Layer: experts.6.net.6.weight, Parameters: 4194304
+Layer: experts.6.net.6.bias, Parameters: 2048
+Layer: experts.6.net.8.weight, Parameters: 4194304
+Layer: experts.6.net.8.bias, Parameters: 2048
+Layer: experts.6.net.10.weight, Parameters: 20480
+Layer: experts.6.net.10.bias, Parameters: 10
+Layer: experts.7.net.0.weight, Parameters: 1605632
+Layer: experts.7.net.0.bias, Parameters: 2048
+Layer: experts.7.net.2.weight, Parameters: 4194304
+Layer: experts.7.net.2.bias, Parameters: 2048
+Layer: experts.7.net.4.weight, Parameters: 4194304
+Layer: experts.7.net.4.bias, Parameters: 2048
+Layer: experts.7.net.6.weight, Parameters: 4194304
+Layer: experts.7.net.6.bias, Parameters: 2048
+Layer: experts.7.net.8.weight, Parameters: 4194304
+Layer: experts.7.net.8.bias, Parameters: 2048
+Layer: experts.7.net.10.weight, Parameters: 20480
+Layer: experts.7.net.10.bias, Parameters: 10
+Layer: experts.8.net.0.weight, Parameters: 1605632
+Layer: experts.8.net.0.bias, Parameters: 2048
+Layer: experts.8.net.2.weight, Parameters: 4194304
+Layer: experts.8.net.2.bias, Parameters: 2048
+Layer: experts.8.net.4.weight, Parameters: 4194304
+Layer: experts.8.net.4.bias, Parameters: 2048
+Layer: experts.8.net.6.weight, Parameters: 4194304
+Layer: experts.8.net.6.bias, Parameters: 2048
+Layer: experts.8.net.8.weight, Parameters: 4194304
+Layer: experts.8.net.8.bias, Parameters: 2048
+Layer: experts.8.net.10.weight, Parameters: 20480
+Layer: experts.8.net.10.bias, Parameters: 10
+Layer: experts.9.net.0.weight, Parameters: 1605632
+Layer: experts.9.net.0.bias, Parameters: 2048
+Layer: experts.9.net.2.weight, Parameters: 4194304
+Layer: experts.9.net.2.bias, Parameters: 2048
+Layer: experts.9.net.4.weight, Parameters: 4194304
+Layer: experts.9.net.4.bias, Parameters: 2048
+Layer: experts.9.net.6.weight, Parameters: 4194304
+Layer: experts.9.net.6.bias, Parameters: 2048
+Layer: experts.9.net.8.weight, Parameters: 4194304
+Layer: experts.9.net.8.bias, Parameters: 2048
+Layer: experts.9.net.10.weight, Parameters: 20480
+Layer: experts.9.net.10.bias, Parameters: 10
+Layer: experts.10.net.0.weight, Parameters: 1605632
+Layer: experts.10.net.0.bias, Parameters: 2048
+Layer: experts.10.net.2.weight, Parameters: 4194304
+Layer: experts.10.net.2.bias, Parameters: 2048
+Layer: experts.10.net.4.weight, Parameters: 4194304
+Layer: experts.10.net.4.bias, Parameters: 2048
+Layer: experts.10.net.6.weight, Parameters: 4194304
+Layer: experts.10.net.6.bias, Parameters: 2048
+Layer: experts.10.net.8.weight, Parameters: 4194304
+Layer: experts.10.net.8.bias, Parameters: 2048
+Layer: experts.10.net.10.weight, Parameters: 20480
+Layer: experts.10.net.10.bias, Parameters: 10
+Layer: experts.11.net.0.weight, Parameters: 1605632
+Layer: experts.11.net.0.bias, Parameters: 2048
+Layer: experts.11.net.2.weight, Parameters: 4194304
+Layer: experts.11.net.2.bias, Parameters: 2048
+Layer: experts.11.net.4.weight, Parameters: 4194304
+Layer: experts.11.net.4.bias, Parameters: 2048
+Layer: experts.11.net.6.weight, Parameters: 4194304
+Layer: experts.11.net.6.bias, Parameters: 2048
+Layer: experts.11.net.8.weight, Parameters: 4194304
+Layer: experts.11.net.8.bias, Parameters: 2048
+Layer: experts.11.net.10.weight, Parameters: 20480
+Layer: experts.11.net.10.bias, Parameters: 10
+Layer: experts.12.net.0.weight, Parameters: 1605632
+Layer: experts.12.net.0.bias, Parameters: 2048
+Layer: experts.12.net.2.weight, Parameters: 4194304
+Layer: experts.12.net.2.bias, Parameters: 2048
+Layer: experts.12.net.4.weight, Parameters: 4194304
+Layer: experts.12.net.4.bias, Parameters: 2048
+Layer: experts.12.net.6.weight, Parameters: 4194304
+Layer: experts.12.net.6.bias, Parameters: 2048
+Layer: experts.12.net.8.weight, Parameters: 4194304
+Layer: experts.12.net.8.bias, Parameters: 2048
+Layer: experts.12.net.10.weight, Parameters: 20480
+Layer: experts.12.net.10.bias, Parameters: 10
+Layer: experts.13.net.0.weight, Parameters: 1605632
+Layer: experts.13.net.0.bias, Parameters: 2048
+Layer: experts.13.net.2.weight, Parameters: 4194304
+Layer: experts.13.net.2.bias, Parameters: 2048
+Layer: experts.13.net.4.weight, Parameters: 4194304
+Layer: experts.13.net.4.bias, Parameters: 2048
+Layer: experts.13.net.6.weight, Parameters: 4194304
+Layer: experts.13.net.6.bias, Parameters: 2048
+Layer: experts.13.net.8.weight, Parameters: 4194304
+Layer: experts.13.net.8.bias, Parameters: 2048
+Layer: experts.13.net.10.weight, Parameters: 20480
+Layer: experts.13.net.10.bias, Parameters: 10
+Layer: experts.14.net.0.weight, Parameters: 1605632
+Layer: experts.14.net.0.bias, Parameters: 2048
+Layer: experts.14.net.2.weight, Parameters: 4194304
+Layer: experts.14.net.2.bias, Parameters: 2048
+Layer: experts.14.net.4.weight, Parameters: 4194304
+Layer: experts.14.net.4.bias, Parameters: 2048
+Layer: experts.14.net.6.weight, Parameters: 4194304
+Layer: experts.14.net.6.bias, Parameters: 2048
+Layer: experts.14.net.8.weight, Parameters: 4194304
+Layer: experts.14.net.8.bias, Parameters: 2048
+Layer: experts.14.net.10.weight, Parameters: 20480
+Layer: experts.14.net.10.bias, Parameters: 10
+Layer: experts.15.net.0.weight, Parameters: 1605632
+Layer: experts.15.net.0.bias, Parameters: 2048
+Layer: experts.15.net.2.weight, Parameters: 4194304
+Layer: experts.15.net.2.bias, Parameters: 2048
+Layer: experts.15.net.4.weight, Parameters: 4194304
+Layer: experts.15.net.4.bias, Parameters: 2048
+Layer: experts.15.net.6.weight, Parameters: 4194304
+Layer: experts.15.net.6.bias, Parameters: 2048
+Layer: experts.15.net.8.weight, Parameters: 4194304
+Layer: experts.15.net.8.bias, Parameters: 2048
+Layer: experts.15.net.10.weight, Parameters: 20480
+Layer: experts.15.net.10.bias, Parameters: 10
+Layer: experts.16.net.0.weight, Parameters: 1605632
+Layer: experts.16.net.0.bias, Parameters: 2048
+Layer: experts.16.net.2.weight, Parameters: 4194304
+Layer: experts.16.net.2.bias, Parameters: 2048
+Layer: experts.16.net.4.weight, Parameters: 4194304
+Layer: experts.16.net.4.bias, Parameters: 2048
+Layer: experts.16.net.6.weight, Parameters: 4194304
+Layer: experts.16.net.6.bias, Parameters: 2048
+Layer: experts.16.net.8.weight, Parameters: 4194304
+Layer: experts.16.net.8.bias, Parameters: 2048
+Layer: experts.16.net.10.weight, Parameters: 20480
+Layer: experts.16.net.10.bias, Parameters: 10
+Layer: experts.17.net.0.weight, Parameters: 1605632
+Layer: experts.17.net.0.bias, Parameters: 2048
+Layer: experts.17.net.2.weight, Parameters: 4194304
+Layer: experts.17.net.2.bias, Parameters: 2048
+Layer: experts.17.net.4.weight, Parameters: 4194304
+Layer: experts.17.net.4.bias, Parameters: 2048
+Layer: experts.17.net.6.weight, Parameters: 4194304
+Layer: experts.17.net.6.bias, Parameters: 2048
+Layer: experts.17.net.8.weight, Parameters: 4194304
+Layer: experts.17.net.8.bias, Parameters: 2048
+Layer: experts.17.net.10.weight, Parameters: 20480
+Layer: experts.17.net.10.bias, Parameters: 10
+Layer: experts.18.net.0.weight, Parameters: 1605632
+Layer: experts.18.net.0.bias, Parameters: 2048
+Layer: experts.18.net.2.weight, Parameters: 4194304
+Layer: experts.18.net.2.bias, Parameters: 2048
+Layer: experts.18.net.4.weight, Parameters: 4194304
+Layer: experts.18.net.4.bias, Parameters: 2048
+Layer: experts.18.net.6.weight, Parameters: 4194304
+Layer: experts.18.net.6.bias, Parameters: 2048
+Layer: experts.18.net.8.weight, Parameters: 4194304
+Layer: experts.18.net.8.bias, Parameters: 2048
+Layer: experts.18.net.10.weight, Parameters: 20480
+Layer: experts.18.net.10.bias, Parameters: 10
+Layer: experts.19.net.0.weight, Parameters: 1605632
+Layer: experts.19.net.0.bias, Parameters: 2048
+Layer: experts.19.net.2.weight, Parameters: 4194304
+Layer: experts.19.net.2.bias, Parameters: 2048
+Layer: experts.19.net.4.weight, Parameters: 4194304
+Layer: experts.19.net.4.bias, Parameters: 2048
+Layer: experts.19.net.6.weight, Parameters: 4194304
+Layer: experts.19.net.6.bias, Parameters: 2048
+Layer: experts.19.net.8.weight, Parameters: 4194304
+Layer: experts.19.net.8.bias, Parameters: 2048
+Layer: experts.19.net.10.weight, Parameters: 20480
+Layer: experts.19.net.10.bias, Parameters: 10
+Layer: gating.weight, Parameters: 15680
+Layer: gating.bias, Parameters: 20
+Total Trainable Parameters: 368287260
+---------------------------------------------
+
+Training Original MoE model for 15 epochs...
+Epoch 1/15, Loss: 2.3005, Accuracy: 12.55%
+Epoch 2/15, Loss: 2.0733, Accuracy: 25.41%
+Epoch 3/15, Loss: 1.6179, Accuracy: 42.56%
+Epoch 4/15, Loss: 1.1892, Accuracy: 57.12%
+Epoch 5/15, Loss: 0.8524, Accuracy: 70.14%
+Epoch 6/15, Loss: 0.6446, Accuracy: 77.90%
+Epoch 7/15, Loss: 0.5341, Accuracy: 82.61%
+Epoch 8/15, Loss: 0.4943, Accuracy: 84.74%
+Epoch 9/15, Loss: 0.4067, Accuracy: 87.36%
+Epoch 10/15, Loss: 0.3837, Accuracy: 88.25%
+Epoch 11/15, Loss: 0.3718, Accuracy: 89.31%
+Epoch 12/15, Loss: 0.3714, Accuracy: 89.87%
+Epoch 13/15, Loss: 0.3329, Accuracy: 90.90%
+Epoch 14/15, Loss: 0.2779, Accuracy: 92.16%
+Epoch 15/15, Loss: 0.2873, Accuracy: 92.47%
+
+Training Optimized MoE model for 15 epochs...
+Epoch 1/15, Loss: 2.3017, Accuracy: 12.24%
+Epoch 2/15, Loss: 2.1039, Accuracy: 24.57%
+Epoch 3/15, Loss: 1.6969, Accuracy: 41.11%
+Epoch 4/15, Loss: 1.1946, Accuracy: 57.67%
+Epoch 5/15, Loss: 0.8294, Accuracy: 71.11%
+Epoch 6/15, Loss: 0.6498, Accuracy: 78.20%
+Epoch 7/15, Loss: 0.5029, Accuracy: 83.49%
+Epoch 8/15, Loss: 0.4176, Accuracy: 86.46%
+Epoch 9/15, Loss: 0.4048, Accuracy: 87.83%
+Epoch 10/15, Loss: 0.4130, Accuracy: 87.62%
+Epoch 11/15, Loss: 0.3291, Accuracy: 90.38%
+Epoch 12/15, Loss: 0.3026, Accuracy: 91.18%
+Epoch 13/15, Loss: 0.2565, Accuracy: 92.92%
+Epoch 14/15, Loss: 0.2764, Accuracy: 92.57%
+Epoch 15/15, Loss: 0.3195, Accuracy: 91.72%
+
+Target Baseline Params (1 Expert + Gating): 368287260
+Using Baseline Config: Num Layers=5
+Calculated Baseline Hidden Dimension (Approx): 9497
+ - Baseline Model Architecture ---
+BaselineMLP(
+  (net): Sequential(
+    (0): Linear(in_features=784, out_features=9497, bias=True)
+    (1): ReLU()
+    (2): Linear(in_features=9497, out_features=9497, bias=True)
+    (3): ReLU()
+    (4): Linear(in_features=9497, out_features=9497, bias=True)
+    (5): ReLU()
+    (6): Linear(in_features=9497, out_features=9497, bias=True)
+    (7): ReLU()
+    (8): Linear(in_features=9497, out_features=9497, bias=True)
+    (9): ReLU()
+    (10): Linear(in_features=9497, out_features=10, bias=True)
+  )
+)
+--- Parameters ---
+Layer: net.0.weight, Parameters: 7445648
+Layer: net.0.bias, Parameters: 9497
+Layer: net.2.weight, Parameters: 90193009
+Layer: net.2.bias, Parameters: 9497
+Layer: net.4.weight, Parameters: 90193009
+Layer: net.4.bias, Parameters: 9497
+Layer: net.6.weight, Parameters: 90193009
+Layer: net.6.bias, Parameters: 9497
+Layer: net.8.weight, Parameters: 90193009
+Layer: net.8.bias, Parameters: 9497
+Layer: net.10.weight, Parameters: 94970
+Layer: net.10.bias, Parameters: 10
+Total Trainable Parameters: 368360149
+--------------------------------------
+Target Baseline Params: 368287260, Actual Baseline Params: 368360149
+
+Training Baseline model for 15 epochs...
+Epoch 1/15, Loss: 3.6513, Accuracy: 9.89%
+Epoch 2/15, Loss: 2.3154, Accuracy: 9.99%
+Epoch 3/15, Loss: 2.3043, Accuracy: 10.99%
+Epoch 4/15, Loss: 2.2769, Accuracy: 13.93%
+Epoch 5/15, Loss: 2.1900, Accuracy: 18.07%
+Epoch 6/15, Loss: 2.0727, Accuracy: 21.48%
+Epoch 7/15, Loss: 1.9175, Accuracy: 25.72%
+Epoch 8/15, Loss: 1.7835, Accuracy: 28.84%
+Epoch 9/15, Loss: 1.6440, Accuracy: 32.65%
+Epoch 10/15, Loss: 1.4823, Accuracy: 37.18%
+Epoch 11/15, Loss: 1.3247, Accuracy: 42.15%
+Epoch 12/15, Loss: 1.2271, Accuracy: 46.18%
+Epoch 13/15, Loss: 1.5743, Accuracy: 40.90%
+Epoch 14/15, Loss: 1.1601, Accuracy: 48.68%
+Epoch 15/15, Loss: 0.9967, Accuracy: 55.23%
+
+--- Original MoE Inference Timing ---
+Starting inference timing for 30 seconds...
+Start Time: 2025-04-22 01:51:45
+NVML initialized for GPU 0.
+NVML shut down.
+End Time:   2025-04-22 01:52:15
+Actual Duration: 30.0074 seconds
+Total Inferences: 439680
+Inferences per Second: 14652.39
+Total Energy Consumed: 4938.18 Joules
+Average Power: 164.57 Watts
+Original MoE Total Trainable Parameters: 368287260
+
+--- Optimized MoE Inference Timing ---
+Starting inference timing for 30 seconds...
+Start Time: 2025-04-22 01:52:15
+NVML initialized for GPU 0.
+NVML shut down.
+End Time:   2025-04-22 01:52:45
+Actual Duration: 30.0008 seconds
+Total Inferences: 454272
+Inferences per Second: 15141.98
+Total Energy Consumed: 4864.19 Joules
+Average Power: 162.14 Watts
+Optimized MoE Total Trainable Parameters: 368287260
+
+--- Baseline Inference Timing ---
+Starting inference timing for 30 seconds...
+Start Time: 2025-04-22 01:52:45
+NVML initialized for GPU 0.
+NVML shut down.
+End Time:   2025-04-22 01:53:15
+Actual Duration: 30.0040 seconds
+Total Inferences: 516096
+Inferences per Second: 17200.91
+Total Energy Consumed: 8951.05 Joules
+Average Power: 298.33 Watts
+Baseline Total Trainable Parameters: 368360149
+
+--- Final Accuracy Comparison ---
+Original MoE Final Accuracy: 93.68%
+Optimized MoE Final Accuracy: 94.32%
+Baseline Final Accuracy: 61.32%
+
+--- Summary ---
+Timing Results (Inferences per Second):
+- Original MoE: 14652.39
+- Optimized MoE: 15141.98
+- Baseline: 17200.91
+
+Accuracy Results:
+- Original MoE: 93.68%
+- Optimized MoE: 94.32%
+- Baseline: 61.32%
+
+Energy Efficiency Results (Inferences per Joule):
+- Original MoE: 89.04 inferences/Joule
+- Optimized MoE: 93.39 inferences/Joule
+- Baseline: 57.66 inferences/Joule

@@ -1,0 +1,82 @@
+Active configuration: LARGE
+Model parameters: Experts=32, Hidden Dim=4096, Layers=6, Top-K=8
+Generating complex synthetic data...
+Data generation complete.
+Using device: cuda
+
+Target Baseline Params (1 Expert + Gating): 2789237600
+Using Baseline Config: Num Layers=6
+Calculated Baseline Hidden Dimension (Approx): 23539
+ - Baseline Model Architecture ---
+BaselineMLP(
+  (net): Sequential(
+    (0): Linear(in_features=784, out_features=23539, bias=True)
+    (1): ReLU()
+    (2): Linear(in_features=23539, out_features=23539, bias=True)
+    (3): ReLU()
+    (4): Linear(in_features=23539, out_features=23539, bias=True)
+    (5): ReLU()
+    (6): Linear(in_features=23539, out_features=23539, bias=True)
+    (7): ReLU()
+    (8): Linear(in_features=23539, out_features=23539, bias=True)
+    (9): ReLU()
+    (10): Linear(in_features=23539, out_features=23539, bias=True)
+    (11): ReLU()
+    (12): Linear(in_features=23539, out_features=10, bias=True)
+  )
+)
+--- Parameters ---
+Layer: net.0.weight, Parameters: 18454576
+Layer: net.0.bias, Parameters: 23539
+Layer: net.2.weight, Parameters: 554084521
+Layer: net.2.bias, Parameters: 23539
+Layer: net.4.weight, Parameters: 554084521
+Layer: net.4.bias, Parameters: 23539
+Layer: net.6.weight, Parameters: 554084521
+Layer: net.6.bias, Parameters: 23539
+Layer: net.8.weight, Parameters: 554084521
+Layer: net.8.bias, Parameters: 23539
+Layer: net.10.weight, Parameters: 554084521
+Layer: net.10.bias, Parameters: 23539
+Layer: net.12.weight, Parameters: 235390
+Layer: net.12.bias, Parameters: 10
+Total Trainable Parameters: 2789253815
+--------------------------------------
+Target Baseline Params: 2789237600, Actual Baseline Params: 2789253815
+
+Training Baseline model for 15 epochs...
+Epoch 1/15, Loss: 356.6357, Accuracy: 9.91%
+Epoch 2/15, Loss: 18.9744, Accuracy: 9.57%
+Epoch 3/15, Loss: 2.3577, Accuracy: 9.86%
+Epoch 4/15, Loss: 4.0417, Accuracy: 10.35%
+Epoch 5/15, Loss: 3.2497, Accuracy: 9.50%
+Epoch 6/15, Loss: 2.3957, Accuracy: 10.38%
+Epoch 7/15, Loss: 2.3538, Accuracy: 9.49%
+Epoch 8/15, Loss: 2.3134, Accuracy: 10.17%
+Epoch 9/15, Loss: 2.3234, Accuracy: 10.20%
+Epoch 10/15, Loss: 2.3070, Accuracy: 10.11%
+Epoch 11/15, Loss: 2.3038, Accuracy: 10.07%
+Epoch 12/15, Loss: 2.3132, Accuracy: 10.27%
+Epoch 13/15, Loss: 2.3037, Accuracy: 10.21%
+Epoch 14/15, Loss: 2.3028, Accuracy: 10.31%
+Epoch 15/15, Loss: 2.3026, Accuracy: 10.31%
+
+--- Baseline Inference Timing ---
+Starting inference timing for 30 seconds...
+Start Time: 2025-04-22 02:50:07
+NVML initialized for GPU 0.
+NVML shut down.
+End Time:   2025-04-22 02:50:38
+Actual Duration: 30.0044 seconds
+Total Inferences: 81024
+Inferences per Second: 2700.41
+Total Energy Consumed: 8741.06 Joules
+Average Power: 291.33 Watts
+Baseline Total Trainable Parameters: 2789253815
+
+--- Summary ---
+Timing Results (Inferences per Second):
+- Baseline: 2700.41
+
+Energy Efficiency Results (Inferences per Joule):
+- Baseline: 9.27 inferences/Joule
