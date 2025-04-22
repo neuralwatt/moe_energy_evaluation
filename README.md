@@ -1,6 +1,6 @@
 # moe_energy_evaluation
 
-An experiment to evaluate the energy efficiency (currently measured via inference speed) of Mixture of Experts (MoE) models compared to standard Multi-Layer Perceptron (MLP) architectures using PyTorch.
+An experiment to evaluate the energy efficiency (currently measured via inference speed and gpu power) of Mixture of Experts (MoE) models compared to standard Multi-Layer Perceptron (MLP) architectures using PyTorch.
 
 ## Overview
 
@@ -36,6 +36,10 @@ Install requirements using:
 ```bash
 pip install -r requirements.txt
 ```
+Run with:
+```bash
+python MoE.py
+```
 
 ## Scaling Analysis: MoE vs Baseline Efficiency
 
@@ -48,17 +52,5 @@ To make the MoE architecture more computationally efficient than a baseline mode
 - The original inefficiencies (data duplication, sequential processing) negate this advantage.
 - The optimized implementation removes these inefficiencies.
 
-### Efficiency Break-Even Formula
-
-For MoE to be more efficient than a dense model with the same parameter count:
-
-```
-(k/n) + routing_overhead < 1
-```
-
-Where:
-- `k` = number of active experts per input. 
-- `n` = total number of experts.
-- `routing_overhead` ≈ 5-10% of computation for a well-implemented MoE.
 
 
