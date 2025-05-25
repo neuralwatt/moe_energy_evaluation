@@ -1,4 +1,4 @@
-# Energy Efficiency of State of the Art Open Weight Mixture of Expert Models.
+# Mixture of Experts, Take Two: Testing Efficiency in SOTA Model
 
 ## This is the second post in a series about evaluating the energy efficiency of mixture of experts models (MoE).
 The first post [here](https://www.neuralwatt.com/blog/mixture-of-experts-when-does-it-really-deliver-energy-efficiency)
