@@ -1,4 +1,4 @@
-# - Scaling Up MoE: What Llama 4 Tells Us About Energy Efficiency
+# Scaling Up MoE: What Llama 4 Tells Us About Energy Efficiency
 
 ## This is the second post in a series about evaluating the energy efficiency of mixture of experts models (MoE).
 The first post [here](https://www.neuralwatt.com/blog/mixture-of-experts-when-does-it-really-deliver-energy-efficiency)
