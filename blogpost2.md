@@ -6,7 +6,7 @@ examined at which point the overhead to select and average experts overcame the 
 This raised the question of how these toy models compared against current state of the art dense and MoE models.
 
 ## Framing the problem.
-In part 1 I creted toy models to be able to directly compare number of tunable parameters.  Among the current available
+In part 1 I created toy models to be able to directly compare number of tunable parameters.  Among the current available
 open weight models it turns out that there aren't great comparisons available which have close to same number
 of tunable parameters.   Instead I decided to just start by comparing 
 [Llama 3.3 70b (Q4_K_M quantization)](https://ollama.com/library/llama3.3:70b) dense model with the 
@@ -30,10 +30,10 @@ Llama 4 Scout model is much more energy efficient than the dense model.
 | llama 4 Scout | 0 days 00:03:56.69 | 64751.78       | 27092        | 0.41               | 114.45        | 1660.30              |
 
 We can see here the significant energy savings across all the metrics with the tokens per watt-second value at 5.8x higher energy efficiency 
-for Scout (MoE) versus 3.3 (dense).  This is inspite of the Llama 4 model having 1.5x more trainable parameters.  I generally perfer normalizing 
-across token lenghths since that represents some of the core energy values regardless of verbosity of the models.  We also see that Scout is 
+for Scout (MoE) versus 3.3 (dense).  This is in spite of the Llama 4 model having 1.5x more trainable parameters.  I generally prefer normalizing 
+across token lengths since that represents some of the core energy values regardless of verbosity of the models.  We also see that Scout is 
 quite a bit more verbose on the same prompt set than Llama 3.3 which is a trend we've also seen with chain of thought models. We can also just normalize
-across responses showing Scout 3.3x more energy efficient than Llama 3.3 (still alot better given its longer responses) per average response.
+across responses showing Scout 3.3x more energy efficient than Llama 3.3 (still a lot better given its longer responses) per average response.
 
 ## What can we learn if we normalize against different parameter properties?
 
@@ -45,7 +45,7 @@ their energy efficiency.  This is a good opportunity to evaluate that.
 | llama 3.3 70b | 7.91E-08                               | 7.91E-08                               |
 | llama 4 Scout | 1.52E-08                               | 9.76E-08                              |
 
-After normlizaing against trainable parameters we see that Scout is again 5.2x more energy efficient than Llama 3.3 
+After normalizing against trainable parameters we see that Scout is again 5.2x more energy efficient than Llama 3.3 
 and normalizing against active parameters its about 80% as energy efficient as Llama 3.3.  So this is the first normalization where we are seeing the relative 
 energy show up more for the dense model.  We have also got confounding results when normalizing against different values. Humm, maybe not so helpful?
 
@@ -60,21 +60,20 @@ Lets see:
 | llama 4 Scout | 1.41E-10                               | 
 
 I guess my hypothesis didn't hold.  When normalized against token output and active parameters Scout is about 1.3x more energy efficient than
-Llama 3.3.  I don't currently have any good ideas on why that might be except that there are likely additional optimizations in Llama 4 which are 
-improving the token output performance and efficiency beyond the overhead of the MoE selection.  
+Llama 3.3.  There is a good technical overview of the core Llama 4 implementation [here](https://collabnix.com/deep-technical-analysis-of-llama-4-scout-maverick-and-behemoth/)
+and its likely that the router and other performance optimizations are minimizing the impact of the model selection relative to the rest of the computations.
 
-I also beleive due to the confounding results when normalizing and the lack of key takaways from this analysis I'm not very confident that we can easily make
+I also believe due to the confounding results when normalizing and the lack of key takeaways from this analysis I'm not very confident that we can easily make
 estimations of future models energy efficiencies from their high level parameter values (trainable/active).  We probably need to be looking in to the specific 
-layer implementations to start to draw additional conclusions.
+layer implementations to start to draw additional conclusions.  
 
 ## Takeaways
-In this part we did demonstrate that at these production level SotA scales (70b+) that the overhead of MoE expert selection is well below the performance gains
-from the fewer calculations by using experts.  We also demonstrated that attempting to compare models by normalizing against active or trainable parameters and that 
-isn't adding alot of insight in to efficiency calculations or enabling improved business decisions around efficiency.  We'll have to keep measuring models instance
-by instance as they are released to get energy efficiency insights.
+At production-scale SotA levels (70B+), the overhead of MoE expert selection is significantly outweighed by the performance gains from reduced computations per forward pass.  
+In terms of energy efficiency Llama 4 scout is surprisingly efficient even when producing more verbose outputs.
+Our analysis shows that normalizing against active or trainable parameters does not provide meaningful insights into efficiency or support better business decisions. Advancements in specific layer optimizations are making scaling behavior diverge from simple parameter count assumptions. As model architectures evolve, real-world benchmarking remains the only reliable method for understanding energy efficiency trends.
 
 ## Notes
-Tests were conducted on fixed sets of prompts against Nvidia A100 80gb using Ollama models all qantized and served in the same format.  Test were hosted on 
-[Crusoe Cloud](https://www.crusoe.ai/).  All energy values are GPU only. While internally we've migrated to doing most of our tests using vllm I chose to use Ollama for this due to some challenges getting comparable quantized models installed and running easily.
+Tests were conducted on fixed sets of prompts against Nvidia A100 80gb using Ollama models all quantized and served in the same format.  Test were hosted on 
+[Crusoe Cloud](https://www.crusoe.ai/).  All energy values are GPU only and batch size of one. Internally we've migrated to doing most of our tests using vllm for this post I chose to use Ollama for this due to challenges getting comparable quantized models installed and running easily.
 
 
