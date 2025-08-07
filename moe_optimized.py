@@ -6,7 +6,7 @@ from expert import Expert # Import the Expert class
 #@torch.compile
 class OptimizedMoE(nn.Module):
     def __init__(self, input_dim, output_dim, num_experts, expert_hidden_dim=128, expert_num_layers=2, top_k=2):
-        super(OptimizedMoE, self).__init__()
+        super().__init__()
         # Identical initialization to original MoE
         self.num_experts = num_experts
         self.expert_hidden_dim = expert_hidden_dim

@@ -5,7 +5,7 @@ from expert import Expert # Import the Expert class
 
 class MoE(nn.Module):
     def __init__(self, input_dim, output_dim, num_experts, expert_hidden_dim=128, expert_num_layers=2, top_k=2):
-        super(MoE, self).__init__()
+        super().__init__()
         self.num_experts = num_experts
         self.expert_hidden_dim = expert_hidden_dim
         self.expert_num_layers = expert_num_layers
