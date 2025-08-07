@@ -1,6 +1,7 @@
 import torch
 import torch.nn as nn
 
+
 # --- Configurable Baseline MLP ---
 class BaselineMLP(nn.Module):
     def __init__(self, input_dim, output_dim, hidden_dim=128, num_layers=2):

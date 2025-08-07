@@ -1,9 +1,10 @@
+import math
+
 import torch
 import torch.nn as nn
 import torch.optim as optim
 from torch.utils.data import TensorDataset, DataLoader
-import math
-import time
+
 
 # Import components from other files
 from moe_optimized2 import OptimizedMoE2
@@ -15,11 +16,10 @@ from utils import (
 )
 from baseline_mlp import BaselineMLP
 from moe_original import MoE as MoE_Original # Rename to avoid conflict
-from moe_optimized import OptimizedMoE
 
 # --- Configuration Switch ---
 # Set to True for large model configuration that favors MoE efficiency
-USE_LARGE_CONFIG = True 
+USE_LARGE_CONFIG = True
 
 # --- Model Size Configurations ---
 SMALL_CONFIG = {

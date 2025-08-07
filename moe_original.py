@@ -3,6 +3,7 @@ import torch.nn as nn
 import torch.nn.functional as F
 from expert import Expert # Import the Expert class
 
+
 class MoE(nn.Module):
     def __init__(self, input_dim, output_dim, num_experts, expert_hidden_dim=128, expert_num_layers=2, top_k=2):
         super(MoE, self).__init__()

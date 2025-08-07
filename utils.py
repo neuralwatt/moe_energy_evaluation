@@ -1,9 +1,7 @@
-import torch
-import torch.nn as nn
-from torch.utils.data import TensorDataset, DataLoader
-import math
 import time
 import warnings
+
+import torch
 try:
     import pynvml
     pynvml_found = True
