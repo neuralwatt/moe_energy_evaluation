@@ -118,7 +118,6 @@ def time_inference(model, dataset, device, duration_seconds=30):
         current_time = time.time()
         while current_time < end_time:
             if device.type == 'cuda': torch.cuda.synchronize()
-            iter_start_time = time.time() # Time before inference
 
             _ = model(sample_batch) # Perform inference
 

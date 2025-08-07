@@ -32,7 +32,6 @@ class OptimizedMoE(nn.Module):
         sorted_expert_indices, sort_order = torch.sort(expert_idx_flat)
         # Apply the same sorting to batch index, gates, and gather the inputs accordingly
         sorted_batch_idx = batch_idx[sort_order]
-        sorted_gates = gates_flat[sort_order]
         # Gather inputs based on the original batch index, then sort them
         # Avoids repeating the input tensor like in the original MoE's x_flat
         dispatched_x = x[sorted_batch_idx] # Shape: (batch_size * top_k, input_dim)
